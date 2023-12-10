@@ -7,7 +7,7 @@ class Cursor {
     constructor() {
         this.target = { x: 0.5, y: 0.5 }; // * coordinates of old cursor
         this.cursor = { x: 0.5, y: 0.5 }; // * coordinates of new cursor
-        this.speed = 1; // * speed of new cursor
+        this.speed = 0.07; // * speed of new cursor
         this.cursorElement = document.getElementById('cursor');
         this.init();
     }
