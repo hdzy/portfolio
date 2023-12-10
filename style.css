@@ -16,7 +16,7 @@
     --width: 20px;
     --height: 20px;
     --border-radius: 50%;
-    --opacity: .5;
+    --opacity: .2;
     width: var(--width, 20px);
     height: var(--height, 20px);
     background: rgba(0, 0, 0, var(--opacity));
@@ -152,10 +152,9 @@ header a {
 
 @keyframes text-cursor {
     from {
-       background-color: rgba(0, 0, 0, 0.9);
+        background-color: rgba(0, 0, 0, 0.9);
     }
     to {
         background-color: rgba(0, 0, 0, 0);
     }
 }
-
