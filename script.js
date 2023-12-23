@@ -17,6 +17,10 @@ class Cursor {
             e.addEventListener('mouseenter', (e) => this.onLinkHover(e))
             e.addEventListener('mouseout', (e) => this.onLinkOut(e))
         });
+        document.querySelectorAll('p, h1, h2, h3, h4, h5, span, strong').forEach((e) => {
+            e.addEventListener('mouseenter', (e) => this.onTextHover(e))
+            e.addEventListener('mouseout', (e) => this.onTextOut(e))
+        })
         this.raf = requestAnimationFrame(() => this.render());
     }
     onMouseMove(e) {
@@ -29,7 +33,6 @@ class Cursor {
         e.target.classList.add('link-hover');
     }
 
-
     onLinkOut(e) {
         this.cursorElement.style.display = '';
         e.target.classList.remove('link-hover');
@@ -38,6 +41,15 @@ class Cursor {
             e.target.classList.remove('link-hover-out');
         }, 400)
     }
+
+    onTextHover(e) {
+
+    }
+
+    onTextOut(e) {
+
+    }
+
     render() {
         const lerp = (a, b, n) => (1 - n) * a + n * b;
         this.cursor.x = lerp(this.cursor.x, this.target.x, this.speed);
@@ -139,3 +151,20 @@ class TextInputHandler {
     }
 }
 const main = new TextInputHandler(textConfig, document.querySelector('#main-section h1'))
+
+
+const skillElements = document.querySelectorAll('.skill');
+
+if (skillElements) {
+    skillElements.forEach((e) => {
+        e.style.setProperty('--fill-percent', `${e.dataset['percent']}%`)
+    })
+}
+
+const cvElem = document.querySelector('#cv-main');
+
+cvElem.addEventListener('click', () => {
+    cvElem.classList.toggle('active');
+    cvElem.style.setProperty('--element-width', `${e.offsetWidth}px`)
+
+})

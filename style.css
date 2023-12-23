@@ -32,6 +32,11 @@ a {
     position: relative;
 }
 
+a:hover {
+    transition: background-position .4s;
+    background-position: -100% 0;
+}
+
 body {
     overflow: hidden;
 }
@@ -57,45 +62,70 @@ header a {
     padding: 3px 5px;
 }
 
-.link-hover {
-    --link-left: 0;
-    --link-right: 0;
-    border-radius: 5px;
-    color: #fff;
-}
+/*.link-hover:after {*/
+/*    content: "";*/
+/*    background: #21201F;*/
+/*    position: absolute;*/
+/*    top: 23px;*/
+/*    left: 5%;*/
+/*    height: 3px;*/
+/*    animation: left-to-right .4s forwards;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*.link-hover-out:after {*/
+/*    content: "";*/
+/*    background: #21201F;*/
+/*    position: absolute;*/
+/*    top: 23px;*/
+/*    left: 5%;*/
+/*    border-radius: 5px;*/
+/*    height: 3px;*/
+/*    animation: right-to-left .4s alternate;*/
+/*}*/
 
 .link-hover:after {
     content: "";
-    z-index: -1;
+    background: #21201F;
     position: absolute;
-    left: var(--link-left, 0);
-    top: var(--link-right, 0);
-    background: rgba(0, 0, 0, 0.9);
-    border-radius: 5px;
-    display: block;
-    width: 100%;
-    height: 100%;
-    animation: left-to-right alternate 0.4s ;
-}
-
-.link-hover-out {
-    color: #21201F;
-}
-
-.link-hover-out {
+    top: 23px;
+    left: 49%;
+    height: 3px;
+    animation: left-to-right .4s forwards;
     border-radius: 5px;
 }
 
 .link-hover-out:after {
     content: "";
+    background: #21201F;
     position: absolute;
+    top: 23px;
+    left: 5%;
     border-radius: 5px;
-    left: 0;
-    top: 0;
-    background: rgba(0, 0, 0, 0.9);
-    width: 100%;
-    height: 100%;
-    animation: right-to-left alternate 0.4s ;
+    height: 3px;
+    animation: right-to-left .4s alternate;
+}
+
+.link-hover:before {
+    content: "";
+    background: #21201F;
+    position: absolute;
+    top: 23px;
+    right: 49%;
+    height: 3px;
+    animation: left-to-right .4s forwards;
+    border-radius: 5px;
+}
+
+.link-hover-out:before {
+    content: "";
+    background: #21201F;
+    position: absolute;
+    top: 23px;
+    right: 5%;
+    border-radius: 5px;
+    height: 3px;
+    animation: right-to-left .4s alternate;
 }
 
 @keyframes left-to-right {
@@ -103,13 +133,13 @@ header a {
         width: 0;
     }
     100% {
-        width: 100%;
+        width: 46%;
     }
 }
 
 @keyframes right-to-left {
     0% {
-        width: 100%;
+        width: 46%;
     }
     100% {
         width: 0;
@@ -120,6 +150,7 @@ header a {
     padding: 20px 50px;
     display: flex;
     align-items: flex-end;
+    justify-content: space-between;
     height: calc(100vh - 81px);
 }
 
@@ -137,7 +168,7 @@ header a {
     display: inline-block;
     width: 3px;
     height: 45px;
-    background-color: #000;
+    background-color: #1d1d26;
     margin: 0 0 -3px 7px;
     border-radius: 5px;
 }
@@ -149,6 +180,89 @@ header a {
 .text-cursor-active:after {
     animation: text-cursor infinite 1.3s;
 }
+
+/*.skills-container {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: flex-start;*/
+/*    height: 100%;*/
+/*    margin-left: auto;*/
+/*    gap: 150px;*/
+/*    padding-top: 100px;*/
+/*}*/
+
+/*.skills-container .skill-cont {*/
+/*    width: 150px;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    gap: 5px;*/
+/*}*/
+
+/*.skills-container .skill-cont h2 {*/
+/*    font-size: 24px;*/
+/*    font-weight: 500;*/
+/*}*/
+
+/*.skill {*/
+/*    --fill-percent: 100%;*/
+/*    width: 100%;*/
+/*    height: 6px;*/
+/*    position: relative;*/
+/*    border-radius: 3px;*/
+/*    box-shadow: 0 0 10px 1px rgba(58, 123, 213, .6);*/
+/*}*/
+
+/*.skill:after {*/
+/*    content: "";*/
+/*    display: block;*/
+/*    position: absolute;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    height: 6px;*/
+/*    width: var(--fill-percent);*/
+/*    background: #3a7bd5;  !* fallback for old browsers *!*/
+/*    background: -webkit-linear-gradient(to right, #3a6073, #3a7bd5);  !* Chrome 10-25, Safari 5.1-6 *!*/
+/*    background: linear-gradient(to right, #3a6073, #3a7bd5); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+/*    border-radius: 3px;*/
+/*}*/
+
+/*.skills-container .skill-cont:hover .skill {*/
+/*    box-shadow: 0 0 10px 1px rgba(144, 78, 149, .6);*/
+/*}*/
+
+/*.skills-container .skill-cont:hover .skill:after {*/
+
+/*    background: #e96443;*/
+/*    background: -webkit-linear-gradient(to right, #e96443, #904e95); !* Chrome 10-25, Safari 5.1-6 *!*/
+/*    background: linear-gradient(to right, #e96443, #904e95); !* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ *!*/
+/*}*/
+
+
+#cv-main {
+    width: 300px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    filter: blur(1.5px);
+    transition: filter .5s;
+}
+
+#cv-main:hover {
+    filter: blur(0);
+
+}
+
+#cv-main.active {
+    position: absolute;
+    right: 50px;
+    top: 10%;
+    width: auto;
+    height: 80%;
+}
+
+
+
+
+
+
 
 @keyframes text-cursor {
     from {
