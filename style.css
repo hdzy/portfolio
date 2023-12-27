@@ -1,6 +1,8 @@
 @import "reset.css";
 
 .develop-notification {
+    position: fixed;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -10,6 +12,7 @@
     color: #fff;
     font-size: 13px;
     text-transform: uppercase;
+    z-index: 2;
 }
 
 #cursor {
@@ -38,7 +41,8 @@ a:hover {
 }
 
 body {
-    overflow: hidden;
+    overflow-x: hidden;
+    padding-top: 81px;
 }
 
 header {
@@ -46,6 +50,9 @@ header {
     width: 100%;
     padding: 15px 40px;
     gap: 20px;
+    position: fixed;
+    top: 25px;
+    z-index: 2;
 }
 
 header a:first-of-type {
@@ -146,12 +153,96 @@ header a {
     }
 }
 
+section {
+    width: 100vw;
+    height: calc(100vh - 81px);
+    display: none;
+}
+
+.section-top {
+    animation: section-display-top 1.5s ease-in-out;
+    overflow: hidden;
+    display: none;
+}
+
+.section-bottom {
+    animation: section-display-bottom 1.5s ease-in-out;
+    overflow: hidden;
+    display: none;
+}
+
+@keyframes section-display-bottom {
+    from {
+        position: absolute;
+        top: 100vh;
+    }
+
+    to {
+        position: absolute;
+        top: 81px;
+    }
+}
+
+@keyframes section-display-top {
+    from {
+        position: absolute;
+        top: -100vh;
+        display: flex;
+    }
+
+    to {
+        position: absolute;
+        top: 81px;
+        display: flex;
+    }
+}
+
+.section-top-hide {
+    animation: section-hide-top 1.5s ease-in-out;
+    overflow: hidden;
+    display: none;
+}
+
+.section-bottom-hide {
+    animation: section-hide-bottom 1.5s ease-in-out;
+    overflow: hidden;
+    display: none;
+}
+
+@keyframes section-hide-bottom {
+    from {
+        position: absolute;
+        top: 81px;
+        display: flex;
+    }
+
+    to {
+        position: absolute;
+        top: 100vh;
+        display: flex;
+    }
+}
+
+@keyframes section-hide-top {
+    from {
+        position: absolute;
+        top: 81px;
+    }
+
+    to {
+        position: absolute;
+        top: -100vh;
+    }
+}
+
+.current-section {
+    display: flex;
+}
+
 #main-section {
     padding: 20px 50px;
-    display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    height: calc(100vh - 81px);
 }
 
 #main-section h1 {

@@ -9,20 +9,25 @@ class Cursor {
         this.cursor = { x: 0.5, y: 0.5 }; // * coordinates of new cursor
         this.speed = 1; // * speed of new cursor
         this.cursorElement = document.getElementById('cursor');
+        this.scroll = window.scrollY;
         this.init();
     }
     init() {
         window.addEventListener("mousemove",(e) => this.onMouseMove(e));
+
         document.querySelectorAll('a').forEach((e) => {
             e.addEventListener('mouseenter', (e) => this.onLinkHover(e))
             e.addEventListener('mouseout', (e) => this.onLinkOut(e))
         });
+
         document.querySelectorAll('p, h1, h2, h3, h4, h5, span, strong').forEach((e) => {
             e.addEventListener('mouseenter', (e) => this.onTextHover(e))
             e.addEventListener('mouseout', (e) => this.onTextOut(e))
         })
+
         this.raf = requestAnimationFrame(() => this.render());
     }
+
     onMouseMove(e) {
         this.target.x = e.clientX / window.innerWidth  - ((this.cursorElement.offsetWidth / 2) / window.innerWidth);
         this.target.y = e.clientY / window.innerHeight - ((this.cursorElement.offsetHeight / 2) / window.innerHeight);
@@ -168,3 +173,52 @@ cvElem.addEventListener('click', () => {
     cvElem.style.setProperty('--element-width', `${e.offsetWidth}px`)
 
 })
+
+let handleScroll = function() {
+    window.scrollTo(0, 0);  // required when scroll bar is drgged
+};
+
+window.addEventListener('scroll', handleScroll, { passive: false });
+
+let handleEvent = function(e) {
+    e.preventDefault();      // disables scrolling by mouse wheel and touch move
+    if (e.deltaY) {
+        const currentSection = document.querySelector('.current-section');
+        if (!currentSection) return;
+        if (e.deltaY >= 0) {
+            if (!currentSection.nextSibling || currentSection.nextElementSibling.tagName !== 'SECTION') return;
+            currentSection.classList.add('section-top-hide');
+
+            const nextEl =  currentSection.nextElementSibling;
+
+            nextEl.classList.add('current-section', 'section-bottom');
+
+            setTimeout(() => {
+
+                currentSection.classList.remove('section-top-hide', 'current-section');
+                nextEl.classList.remove('section-bottom');
+            }, 1400);
+
+        } else {
+            if (!currentSection.previousElementSibling || currentSection.previousElementSibling.tagName !== 'SECTION') return;
+            currentSection.classList.add('section-bottom-hide');
+
+            const prevEl = currentSection.previousElementSibling;
+
+            prevEl.classList.add('current-section', 'section-top');
+
+            setTimeout(() => {
+                currentSection.classList.remove('section-bottom-hide', 'current-section');
+                prevEl.classList.remove('section-top');
+            }, 1400);
+        }
+    }
+};
+
+/*
+ Disable Scroll and do screen scroll
+ */
+
+window.addEventListener('scroll', handleEvent, { passive: false });
+window.addEventListener('mousewheel', handleEvent, { passive: false });
+window.addEventListener('touchmove', handleEvent, { passive: false });
