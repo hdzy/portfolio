@@ -1,3 +1,7 @@
+Array.prototype.last = function() {
+    return this[this.length - 1];
+}
+
 
 // * class of mouse cursor
 const config = {
@@ -174,51 +178,129 @@ cvElem.addEventListener('click', () => {
 
 })
 
-let handleScroll = function() {
-    window.scrollTo(0, 0);  // required when scroll bar is drgged
-};
+// const handleScroll = () => {
+//     window.scrollTo(0, 0);  // required when scroll bar is drgged
+// }
+//
+// window.addEventListener('scroll', handleScroll, { passive: false });
+//
+// let isAnimationScroll = false;
+// let handleEvent = function(e) {
+//     e.preventDefault();      // disables scrolling by mouse wheel and touch move
+//     if (e.deltaY && !isAnimationScroll) {
+//         const currentSection = document.querySelector('.current-section');
+//         if (!currentSection) return;
+//         if (e.deltaY >= 0) {
+//             if (!currentSection.nextSibling || currentSection.nextElementSibling.tagName !== 'SECTION') return;
+//             currentSection.classList.add('section-top-hide');
+//
+//             const nextEl =  currentSection.nextElementSibling;
+//
+//             nextEl.classList.add('current-section', 'section-bottom');
+//             isAnimationScroll = true;
+//             setTimeout(() => {
+//                 isAnimationScroll = false;
+//                 currentSection.classList.remove('section-top-hide', 'current-section');
+//                 nextEl.classList.remove('section-bottom');
+//             }, 1400);
+//
+//         } else {
+//             if (!currentSection.previousElementSibling || currentSection.previousElementSibling.tagName !== 'SECTION') return;
+//             currentSection.classList.add('section-bottom-hide');
+//
+//             const prevEl = currentSection.previousElementSibling;
+//
+//             prevEl.classList.add('current-section', 'section-top');
+//             isAnimationScroll = true;
+//             setTimeout(() => {
+//                 isAnimationScroll = false;
+//                 currentSection.classList.remove('section-bottom-hide', 'current-section');
+//                 prevEl.classList.remove('section-top');
+//             }, 1400);
+//         }
+//     }
+// };
+//
+// /*
+//  Disable Scroll and do screen scroll
+//  */
+//
+// window.addEventListener('scroll', handleEvent, { passive: false });
+// window.addEventListener('mousewheel', handleEvent, { passive: false });
+// window.addEventListener('touchmove', handleEvent, { passive: false });
 
-window.addEventListener('scroll', handleScroll, { passive: false });
+class ScrollController {
+    constructor(element) {
+        this.element = element;
+        this.isAnimationScroll = false;
+        this.currentSection = document.querySelector('.current-section');
+        this.nextEl = document.querySelector('.current-section').nextElementSibling;
+        this.prevEl = document.querySelector('.current-section').previousElementSibling;
+        this.status = 'active';
+        this.init();
+    }
 
-let handleEvent = function(e) {
-    e.preventDefault();      // disables scrolling by mouse wheel and touch move
-    if (e.deltaY) {
-        const currentSection = document.querySelector('.current-section');
-        if (!currentSection) return;
+    init() {
+        this.element.addEventListener('scroll', this.blockSidebarScroll, { passive: false });
+        this.element.addEventListener('scroll', (e) => this.scrollHandler(e), { passive: false });
+        this.element.addEventListener('mousewheel', (e) => this.scrollHandler(e), { passive: false });
+        this.element.addEventListener('touchmove', (e) => this.scrollHandler(e), { passive: false });
+    }
+
+    blockSidebarScroll() {
+        if (this.status !== 'active') return;
+        this.element.scrollTo(0, 0);  // required when scroll bar is drgged
+    }
+
+    scrollHandler(e) {
+        if (this.status !== 'active') return;
+        e.preventDefault();
+        if (!e.deltaY || this.isAnimationScroll) return;
         if (e.deltaY >= 0) {
-            if (!currentSection.nextSibling || currentSection.nextElementSibling.tagName !== 'SECTION') return;
-            currentSection.classList.add('section-top-hide');
-
-            const nextEl =  currentSection.nextElementSibling;
-
-            nextEl.classList.add('current-section', 'section-bottom');
-
-            setTimeout(() => {
-
-                currentSection.classList.remove('section-top-hide', 'current-section');
-                nextEl.classList.remove('section-bottom');
-            }, 1400);
-
+            if (!this.nextEl || this.nextEl.tagName !== 'SECTION') return;
+            this.scrollClassesHandler('next', 'section-top-hide', 'section-bottom');
         } else {
-            if (!currentSection.previousElementSibling || currentSection.previousElementSibling.tagName !== 'SECTION') return;
-            currentSection.classList.add('section-bottom-hide');
-
-            const prevEl = currentSection.previousElementSibling;
-
-            prevEl.classList.add('current-section', 'section-top');
-
-            setTimeout(() => {
-                currentSection.classList.remove('section-bottom-hide', 'current-section');
-                prevEl.classList.remove('section-top');
-            }, 1400);
+            if (!this.prevEl || this.prevEl.tagName !== 'SECTION') return;
+            this.scrollClassesHandler('prev', 'section-bottom-hide', 'section-top');
         }
     }
-};
 
-/*
- Disable Scroll and do screen scroll
- */
+    updateCurrentSection() {
+        this.currentSection = document.querySelector('.current-section');
+        this.nextEl = this.currentSection.nextElementSibling;
+        this.prevEl = this.currentSection.previousElementSibling;
 
-window.addEventListener('scroll', handleEvent, { passive: false });
-window.addEventListener('mousewheel', handleEvent, { passive: false });
-window.addEventListener('touchmove', handleEvent, { passive: false });
+        if (this.currentSection.classList.contains('scroll-pause')) {
+            this.pauseScroll();
+        } else if (this.status === 'pause') {
+            this.resumeScroll();
+        }
+    }
+
+    scrollClassesHandler(type, classHide, classDisplay) {
+        this.currentSection.classList.add(classHide);
+        this.currentSection.classList.remove('current-section');
+        const current = type === 'next' ? this.nextEl : this.prevEl;
+        current.classList.add('current-section', classDisplay);
+
+        this.isAnimationScroll = true;
+        this.updateCurrentSection();
+
+        setTimeout(() => {
+            const current = type === 'next' ? this.prevEl : this.nextEl;
+            current.classList.remove(classHide);
+            this.currentSection.classList.remove(classDisplay);
+            this.isAnimationScroll = false;
+        }, 1400);
+    }
+
+    pauseScroll() {
+        this.status = 'pause';
+    }
+
+    resumeScroll() {
+        this.status = 'active';
+    }
+}
+
+const scrollController = new ScrollController(window);

@@ -1,5 +1,14 @@
 @import "reset.css";
 
+/* хром, сафари */
+*::-webkit-scrollbar { width: 0; }
+
+/* ie 10+ */
+*  { -ms-overflow-style: none; }
+
+/* фф (свойство больше не работает, других способов тоже нет)*/
+* { overflow: -moz-scrollbars-none; }
+
 .develop-notification {
     position: fixed;
     top: 0;
@@ -41,7 +50,7 @@ a:hover {
 }
 
 body {
-    overflow-x: hidden;
+    overflow: hidden;
     padding-top: 81px;
 }
 
@@ -156,7 +165,12 @@ header a {
 section {
     width: 100vw;
     height: calc(100vh - 81px);
+    padding: 20px 50px;
     display: none;
+}
+
+section:nth-of-type(2) {
+    height: 200vw;
 }
 
 .section-top {
@@ -175,11 +189,13 @@ section {
     from {
         position: absolute;
         top: 100vh;
+        display: flex;
     }
 
     to {
         position: absolute;
         top: 81px;
+        display: flex;
     }
 }
 
@@ -227,12 +243,18 @@ section {
     from {
         position: absolute;
         top: 81px;
+        display: flex;
     }
 
     to {
         position: absolute;
         top: -100vh;
+        display: flex;
     }
+}
+
+.scroll-pause {
+    overflow-y: scroll;
 }
 
 .current-section {
@@ -240,7 +262,6 @@ section {
 }
 
 #main-section {
-    padding: 20px 50px;
     align-items: flex-end;
     justify-content: space-between;
 }
