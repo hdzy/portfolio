@@ -304,3 +304,26 @@ class ScrollController {
 }
 
 const scrollController = new ScrollController(window);
+
+const workSection = document.querySelector('#work-section');
+let scroll = 0;
+const content = document.querySelector('.project .content');
+workSection.addEventListener('mousewheel', (e) => {
+    if (scroll + e.deltaY >= 0) {
+        if (scroll + e.deltaY <= content.offsetHeight - 320) {
+            scroll = scroll + e.deltaY;
+            content.style.setProperty('--mt', `-${scroll}px`);
+        } else {
+            scroll = content.offsetHeight - 320;
+            content.style.setProperty('--mt', `-${scroll}px`);
+        }
+    } else {
+        scroll = 0;
+        content.style.setProperty('--mt', `-${scroll}px`);
+    }
+})
+
+// window.addEventListener('resize', () => {
+//     scroll = 0;
+//     content.style.setProperty('--mt', `-${scroll}px`);
+// })

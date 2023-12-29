@@ -6,9 +6,6 @@
 /* ie 10+ */
 *  { -ms-overflow-style: none; }
 
-/* фф (свойство больше не работает, других способов тоже нет)*/
-* { overflow: -moz-scrollbars-none; }
-
 .develop-notification {
     position: fixed;
     top: 0;
@@ -167,10 +164,6 @@ section {
     height: calc(100vh - 81px);
     padding: 20px 50px;
     display: none;
-}
-
-section:nth-of-type(2) {
-    height: 200vw;
 }
 
 .section-top {
@@ -370,12 +363,6 @@ section:nth-of-type(2) {
     height: 80%;
 }
 
-
-
-
-
-
-
 @keyframes text-cursor {
     from {
         background-color: rgba(0, 0, 0, 0.9);
@@ -383,4 +370,55 @@ section:nth-of-type(2) {
     to {
         background-color: rgba(0, 0, 0, 0);
     }
+}
+
+
+#work-section {
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+#work-section .text-cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+#work-section .text-cont h1 {
+    font-size: 50px;
+}
+
+#work-section .projects-section {
+    display: flex;
+    align-items: flex-end;
+}
+
+#work-section .projects-section .project {
+    width: 700px;
+    position: relative;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 33px;
+    overflow: hidden;
+}
+
+#work-section .projects-section .project .bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+}
+
+#work-section .projects-section .project .content {
+    --mt: 0;
+    object-fit: cover;
+    width: 516px;
+    margin-top: var(--mt, 0);
+    /*
+    calc(-1232px + 320px)
+     */
+
+    transition: margin-top .3s;
 }
