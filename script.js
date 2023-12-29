@@ -159,6 +159,7 @@ class TextInputHandler {
         }
     }
 }
+
 const main = new TextInputHandler(textConfig, document.querySelector('#main-section h1'))
 
 
@@ -237,6 +238,7 @@ class ScrollController {
         this.nextEl = document.querySelector('.current-section').nextElementSibling;
         this.prevEl = document.querySelector('.current-section').previousElementSibling;
         this.status = 'active';
+        this.activationCounter = 0;
         this.init();
     }
 
@@ -245,6 +247,16 @@ class ScrollController {
         this.element.addEventListener('scroll', (e) => this.scrollHandler(e), { passive: false });
         this.element.addEventListener('mousewheel', (e) => this.scrollHandler(e), { passive: false });
         this.element.addEventListener('touchmove', (e) => this.scrollHandler(e), { passive: false });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Control') this.pauseScroll();
+        });
+
+        window.addEventListener('keyup', (e) => {
+            if (e.key === 'Control') this.resumeScroll();
+        })
+
+
     }
 
     blockSidebarScroll() {
@@ -270,11 +282,11 @@ class ScrollController {
         this.nextEl = this.currentSection.nextElementSibling;
         this.prevEl = this.currentSection.previousElementSibling;
 
-        if (this.currentSection.classList.contains('scroll-pause')) {
-            this.pauseScroll();
-        } else if (this.status === 'pause') {
-            this.resumeScroll();
-        }
+        // if (this.currentSection.classList.contains('scroll-pause')) {
+        //     this.pauseScroll();
+        // } else if (this.status === 'pause') {
+        //     this.resumeScroll();
+        // }
     }
 
     scrollClassesHandler(type, classHide, classDisplay) {
@@ -298,8 +310,16 @@ class ScrollController {
         this.status = 'pause';
     }
 
-    resumeScroll() {
-        this.status = 'active';
+    resumeScroll(isPausedActivation = false) {
+        if (isPausedActivation) {
+            this.activationCounter += 1;
+            if (this.activationCounter > 5) {
+                this.status = 'active';
+                this.activationCounter = 0;
+            }
+        } else {
+            this.status = 'active';
+        }
     }
 }
 
@@ -309,15 +329,22 @@ const workSection = document.querySelector('#work-section');
 let scroll = 0;
 const content = document.querySelector('.project .content');
 workSection.addEventListener('mousewheel', (e) => {
+    if (scrollController.currentSection.id === 'work-section') {
+        scrollController.pauseScroll();
+    } else {
+        scrollController.resumeScroll()
+    }
     if (scroll + e.deltaY >= 0) {
         if (scroll + e.deltaY <= content.offsetHeight - 320) {
             scroll = scroll + e.deltaY;
             content.style.setProperty('--mt', `-${scroll}px`);
         } else {
+            scrollController.resumeScroll(true);
             scroll = content.offsetHeight - 320;
             content.style.setProperty('--mt', `-${scroll}px`);
         }
     } else {
+        scrollController.resumeScroll(true);
         scroll = 0;
         content.style.setProperty('--mt', `-${scroll}px`);
     }
