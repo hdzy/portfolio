@@ -18,7 +18,7 @@
     color: #fff;
     font-size: 13px;
     text-transform: uppercase;
-    z-index: 2;
+    z-index: 10;
 }
 
 #cursor {
@@ -58,7 +58,7 @@ header {
     gap: 20px;
     position: fixed;
     top: 25px;
-    z-index: 2;
+    z-index: 50;
 }
 
 header a:first-of-type {

@@ -335,12 +335,12 @@ workSection.addEventListener('mousewheel', (e) => {
         scrollController.resumeScroll()
     }
     if (scroll + e.deltaY >= 0) {
-        if (scroll + e.deltaY <= content.offsetHeight - 320) {
+        if (scroll + e.deltaY <= content.offsetHeight - 370) {
             scroll = scroll + e.deltaY;
             content.style.setProperty('--mt', `-${scroll}px`);
         } else {
             scrollController.resumeScroll(true);
-            scroll = content.offsetHeight - 320;
+            scroll = content.offsetHeight - 370;
             content.style.setProperty('--mt', `-${scroll}px`);
         }
     } else {
