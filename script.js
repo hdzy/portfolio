@@ -328,6 +328,7 @@ const scrollController = new ScrollController(window);
 const workSection = document.querySelector('#work-section');
 let scroll = 0;
 const content = document.querySelector('.project .content');
+const step = 20;
 workSection.addEventListener('mousewheel', (e) => {
     if (scrollController.currentSection.id === 'work-section') {
         scrollController.pauseScroll();
@@ -336,7 +337,7 @@ workSection.addEventListener('mousewheel', (e) => {
     }
     if (scroll + e.deltaY >= 0) {
         if (scroll + e.deltaY <= content.offsetHeight - 370) {
-            scroll = scroll + e.deltaY;
+            scroll = scroll + step;
             content.style.setProperty('--mt', `-${scroll}px`);
         } else {
             scrollController.resumeScroll(true);
