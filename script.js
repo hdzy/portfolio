@@ -282,11 +282,11 @@ class ScrollController {
         this.nextEl = this.currentSection.nextElementSibling;
         this.prevEl = this.currentSection.previousElementSibling;
 
-        // if (this.currentSection.classList.contains('scroll-pause')) {
-        //     this.pauseScroll();
-        // } else if (this.status === 'pause') {
-        //     this.resumeScroll();
-        // }
+        if (this.currentSection.classList.contains('scroll-pause')) {
+            this.pauseScroll();
+        } else if (this.status === 'pause') {
+            this.resumeScroll();
+        }
     }
 
     scrollClassesHandler(type, classHide, classDisplay) {
@@ -306,14 +306,28 @@ class ScrollController {
         }, 1400);
     }
 
+    scrollNext() {
+        if (!this.nextEl || this.nextEl.tagName !== 'SECTION') return;
+        this.scrollClassesHandler('next', 'section-top-hide', 'section-bottom');
+    }
+
+    scrollPrev() {
+        if (!this.prevEl || this.prevEl.tagName !== 'SECTION') return;
+        this.scrollClassesHandler('prev', 'section-bottom-hide', 'section-top');
+    }
+
     pauseScroll() {
         this.status = 'pause';
     }
 
-    resumeScroll(isPausedActivation = false) {
+    resumeScroll(isPausedActivation = false, e = null) {
         if (isPausedActivation) {
-            this.activationCounter += 1;
-            if (this.activationCounter > 5) {
+            if (e && e.deltaY < 4) {
+                this.activationCounter += 0.1;
+            } else {
+                this.activationCounter += 1;
+            }
+            if (this.activationCounter > 4) {
                 this.status = 'active';
                 this.activationCounter = 0;
             }
@@ -325,33 +339,95 @@ class ScrollController {
 
 const scrollController = new ScrollController(window);
 
-const workSection = document.querySelector('#work-section');
-let scroll = 0;
-const content = document.querySelector('.project .content');
-const step = 20;
-workSection.addEventListener('mousewheel', (e) => {
-    if (scrollController.currentSection.id === 'work-section') {
-        scrollController.pauseScroll();
-    } else {
-        scrollController.resumeScroll()
+
+
+
+class ProjectScroll {
+    constructor(scrollEl, element) {
+        this.scrollEl = scrollEl;
+        this.el = element;
+        this.init();
+        this.scroll = 0;
     }
-    if (scroll + e.deltaY >= 0) {
-        if (scroll + e.deltaY <= content.offsetHeight - 370) {
-            scroll = scroll + step;
-            content.style.setProperty('--mt', `-${scroll}px`);
+
+    init() {
+        this.scrollEl.addEventListener('mousewheel', (e) => this.controller(e));
+    }
+
+    controller(e) {
+        if (scrollController.isAnimationScroll) return;
+        this.el.style.setProperty('--duration', `${e.deltaY / 5}ms`);
+        if (this.scroll + e.deltaY >= 0) {
+            if (this.scroll + e.deltaY <= this.el.offsetHeight - 370) {
+                this.scroll += e.deltaY;
+                this.el.style.setProperty('--mt', `-${this.scroll}px`);
+            } else {
+                scroll = this.el.offsetHeight - 370;
+                this.el.style.setProperty('--mt', `-${this.scroll}px`);
+            }
         } else {
-            scrollController.resumeScroll(true);
-            scroll = content.offsetHeight - 370;
-            content.style.setProperty('--mt', `-${scroll}px`);
+            this.scroll = 0;
+            this.el.style.setProperty('--mt', `-${this.scroll}px`);
         }
-    } else {
-        scrollController.resumeScroll(true);
-        scroll = 0;
-        content.style.setProperty('--mt', `-${scroll}px`);
     }
-})
+    updateEl(newEl) {
+        this.el.classList.remove('active-content');
+        newEl.classList.add('active-content');
+        this.el = newEl;
+        this.el.style.setProperty('--mt', `0`);
+        this.scroll = 0;
+    }
+}
+
+const mainProject = new ProjectScroll(document.querySelector('#work-section'), document.querySelector('.project .content'));
+//
+// const workSection = document.querySelector('#work-section');
+// let scroll = 0;
+// const content = document.querySelector('.project .content');
+// workSection.addEventListener('mousewheel', (e) => {
+//     if (scrollController.currentSection.id === 'work-section') {
+//         scrollController.pauseScroll();
+//     } else {
+//         scrollController.resumeScroll(true, e)
+//     }
+//     if (e.deltaY < 4) {
+//         content.style.setProperty('--duration', `.03s`);
+//     }
+//     if (scroll + e.deltaY >= 0) {
+//         if (scroll + e.deltaY <= content.offsetHeight - 370) {
+//             scroll = scroll + e.deltaY;
+//             content.style.setProperty('--mt', `-${scroll}px`);
+//         } else {
+//             scrollController.resumeScroll(true, e);
+//             scroll = content.offsetHeight - 370;
+//             content.style.setProperty('--mt', `-${scroll}px`);
+//         }
+//     } else {
+//         scrollController.resumeScroll(true, e);
+//         scroll = 0;
+//         content.style.setProperty('--mt', `-${scroll}px`);
+//     }
+// })
 
 // window.addEventListener('resize', () => {
 //     scroll = 0;
 //     content.style.setProperty('--mt', `-${scroll}px`);
 // })
+
+document.querySelectorAll('.up').forEach((e) => {
+    e.addEventListener('click', () => scrollController.scrollPrev());
+})
+
+document.querySelectorAll('.down').forEach((e) => {
+    e.addEventListener('click', () => scrollController.scrollNext());
+})
+document.querySelectorAll('.projects-picker > a').forEach((e) => {
+    e.addEventListener('click', (el) => {
+        document.querySelector('.projects-picker > a.active').classList.remove('active');
+        const target = el.target;
+        target.classList.add('active');
+        document.querySelectorAll('.project-info > .active').forEach(e => e.classList.remove('active'))
+        document.querySelectorAll(`.project-info > *[data-id="${target.dataset['id']}"]`).forEach(e => e.classList.add('active'));
+        mainProject.updateEl(document.querySelector(`.content[data-id="${target.dataset['id']}"]`));
+    })
+})
