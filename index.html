@@ -8,155 +8,288 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+
     <script src="./script.js" defer></script>
 </head>
 <body>
 <div id="cursor"></div>
 <div class="develop-notification">Portfolio is developing now</div>
-    <header>
-        <a href="#">Smirnov Oleg</a>
-        <a href="#">Work</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-    </header>
-    <section class="current-section" id="main-section">
-        <h1><span>Frontend Developer from Saint-Petersburg and I</span></h1>
-        <img id="cv-main" src="./images/cv.jpeg" alt="">
-    </section>
-    <section id="work-section" class="scroll-pause">
-    <div class="text-cont">
-        <div class="scroll-cont">
-            <a class="up">scroll to start section<img src="./images/arrow-up.svg"></a>
-            <a class="down">scroll to about section<img src="./images/arrow-up.svg"></a>
+<header>
+    <a href="#">Smirnov Oleg</a>
+    <a href="#">Work</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+</header>
+<section class="current-section" id="main-section">
+    <h1><span>Frontend Developer from Saint-Petersburg and I</span></h1>
+    <img id="cv-main" src="./images/cv.jpeg" alt="">
+</section>
+<!--    <section id="work-section" class="scroll-pause">-->
+<!--    <div class="text-cont">-->
+<!--        <div class="scroll-cont">-->
+<!--            <a class="up">scroll to start section<img src="./images/arrow-up.svg"></a>-->
+<!--            <a class="down">scroll to about section<img src="./images/arrow-up.svg"></a>-->
+<!--        </div>-->
+<!--        <h1>projects</h1>-->
+<!--        <div class="projects-picker">-->
+<!--            <a data-id="dizainazona" class="active">dizainazona</a>-->
+<!--            <a data-id="2">2 project number</a>-->
+<!--            <a data-id="3">3 project number</a>-->
+<!--            <a data-id="4">4 project number</a>-->
+<!--            <a data-id="5">5 project number</a>-->
+<!--            <a data-id="6">6 project number</a>-->
+<!--            <a data-id="7">7 project number</a>-->
+<!--            <a data-id="8">8 project number</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="projects-section">-->
+<!--        <div class="project-info">-->
+<!--            <h1  data-id="dizainazona" class="active">Dizainazona</h1>-->
+<!--            <div data-id="dizainazona" class="stack active">-->
+<!--                <p>WordPress</p>-->
+<!--                <p>WooCommerce</p>-->
+<!--                <p>CSS3</p>-->
+<!--                <p>HTML5</p>-->
+<!--                <p>JavaScript</p>-->
+<!--                <p>JQuerry</p>-->
+<!--            </div>-->
+<!--            <p   data-id="dizainazona" class="active">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.-->
+
+<!--                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!-->
+
+<!--                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>-->
+<!--            <h1  data-id="1">project 1</h1>-->
+<!--            <div data-id="1" class="stack">-->
+<!--                <p>HTML5</p>-->
+<!--                <p>JavaScript</p>-->
+<!--                <p>JQuerry</p>-->
+<!--            </div>-->
+<!--            <p   data-id="1">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.-->
+
+<!--                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!-->
+
+<!--                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>-->
+<!--            <h1  data-id="2">project 2</h1>-->
+<!--            <div data-id="2" class="stack">-->
+<!--                <p>HTML5</p>-->
+<!--                <p>JavaScript</p>-->
+<!--                <p>JQuerry</p>-->
+<!--            </div>-->
+<!--            <p   data-id="2">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.-->
+
+<!--                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!-->
+
+<!--                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>-->
+<!--            <h1  data-id="3">project 3</h1>-->
+<!--            <div data-id="3" class="stack">-->
+<!--                <p>HTML5</p>-->
+<!--                <p>JavaScript</p>-->
+<!--                <p>JQuerry</p>-->
+<!--            </div>-->
+<!--            <p   data-id="3">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.-->
+
+<!--                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!-->
+
+<!--                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>-->
+<!--            <h1  data-id="4">project 4</h1>-->
+<!--            <div data-id="4" class="stack">-->
+<!--                <p>HTML5</p>-->
+<!--                <p>JavaScript</p>-->
+<!--                <p>JQuerry</p>-->
+<!--            </div>-->
+<!--            <p   data-id="4">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.-->
+
+<!--                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!-->
+
+<!--                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>-->
+<!--            <h1  data-id="5">project 5</h1>-->
+<!--            <div data-id="5" class="stack">-->
+<!--                <p>HTML5</p>-->
+<!--                <p>JavaScript</p>-->
+<!--                <p>JQuerry</p>-->
+<!--            </div>-->
+<!--            <p   data-id="5">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.-->
+
+<!--                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!-->
+
+<!--                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>-->
+<!--            <h1  data-id="6">project 6</h1>-->
+<!--            <div data-id="6" class="stack">-->
+<!--                <p>HTML5</p>-->
+<!--                <p>JavaScript</p>-->
+<!--                <p>JQuerry</p>-->
+<!--            </div>-->
+<!--            <p   data-id="6">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.-->
+
+<!--                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!-->
+
+<!--                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>-->
+<!--            <h1  data-id="7">project 7</h1>-->
+<!--            <div data-id="7" class="stack">-->
+<!--                <p>HTML5</p>-->
+<!--                <p>JavaScript</p>-->
+<!--                <p>JQuerry</p>-->
+<!--            </div>-->
+<!--            <p   data-id="7">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.-->
+
+<!--                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!-->
+
+<!--                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>-->
+<!--            <h1  data-id="8">project 8</h1>-->
+<!--            <div data-id="8" class="stack">-->
+<!--                <p>HTML5</p>-->
+<!--                <p>JavaScript</p>-->
+<!--                <p>JQuerry</p>-->
+<!--            </div>-->
+<!--            <p   data-id="8">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.-->
+
+<!--                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!-->
+
+<!--                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>-->
+<!--        </div>-->
+<!--        <div class="project">-->
+<!--            <img class="bg" src="./images/macbook.png" alt="">-->
+<!--            <img data-id="dizainazona" class="content active-content" src="./images/c_1.png" alt="">-->
+<!--            <p class="content" data-id="2">2</p>-->
+<!--            <p class="content" data-id="3">3</p>-->
+<!--            <p class="content" data-id="4">4</p>-->
+<!--            <p class="content" data-id="5">5</p>-->
+<!--            <p class="content" data-id="6">6</p>-->
+<!--            <p class="content" data-id="7">7</p>-->
+<!--            <p class="content" data-id="8">8</p>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<section id="work-section" class="scroll-pause">
+    <div class="info-col">
+        <div data-project="0" class="project-info">
+            <div class="stack__row">
+                <h3 class="stack__title">
+                    Stack:
+                </h3>
+                <p class="stack__el">
+                    React
+                </p>
+                <p class="stack__el">
+                    NodeJS
+                </p>
+                <p class="stack__el">
+                    PHP
+                </p>
+            </div>
+            <p class="project-description"></p>
+            <p>skip</p>
         </div>
-        <h1>projects</h1>
-        <div class="projects-picker">
-            <a data-id="dizainazona" class="active">dizainazona</a>
-            <a data-id="2">2 project number</a>
-            <a data-id="3">3 project number</a>
-            <a data-id="4">4 project number</a>
-            <a data-id="5">5 project number</a>
-            <a data-id="6">6 project number</a>
-            <a data-id="7">7 project number</a>
-            <a data-id="8">8 project number</a>
+        <div data-project="1" class="project-info current">
+            <div class="stack__row">
+                <h3 class="stack__title">
+                    Stack:
+                </h3>
+                <p class="stack__el">
+                    React
+                </p>
+                <p class="stack__el">
+                    NodeJS
+                </p>
+                <p class="stack__el">
+                    PHP
+                </p>
+            </div>
+            <p class="project-description"></p>
+        </div>
+        <div data-project="2" class="project-info">
+            <div class="stack__row">
+                <h3 class="stack__title">
+                    Stack:
+                </h3>
+                <p class="stack__el">
+                    React
+                </p>
+                <p class="stack__el">
+                    NodeJS
+                </p>
+                <p class="stack__el">
+                    PHP
+                </p>
+            </div>
+            <p class="project-description">
+            </p>
+        </div>
+        <div data-project="3" class="project-info">
+            <div class="stack__row">
+                <h3 class="stack__title">
+                    Stack:
+                </h3>
+                <p class="stack__el">
+                    React
+                </p>
+                <p class="stack__el">
+                    NodeJS
+                </p>
+                <p class="stack__el">
+                    PHP
+                </p>
+            </div>
+            <p class="project-description">
+            </p>
+        </div>
+        <div data-project="4" class="project-info">
+            <div class="stack__row">
+                <h3 class="stack__title">
+                    Stack:
+                </h3>
+                <p class="stack__el">
+                    React
+                </p>
+                <p class="stack__el">
+                    NodeJS
+                </p>
+                <p class="stack__el">
+                    PHP
+                </p>
+            </div>
+            <p class="project-description"></p>
+        </div>
+        <div class="swiper project-picker">
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <h2>
+                        СКС Автозайм
+                    </h2>
+                </div>
+                <div class="swiper-slide">
+                    <h2>
+                        Беринг
+                    </h2>
+                </div>
+                <div class="swiper-slide">
+                    <h2>
+                        project 3
+                    </h2>
+                </div>
+                <div class="swiper-slide">
+                    <h2>
+                        project 4
+                    </h2>
+                </div>
+                <div class="swiper-slide">
+                    <h2>
+                        project 5
+                    </h2>
+                </div>
+            </div>
+            <div class="swiper-button-next"></div>
         </div>
     </div>
-    <div class="projects-section">
-        <div class="project-info">
-            <h1  data-id="dizainazona" class="active">Dizainazona</h1>
-            <div data-id="dizainazona" class="stack active">
-                <p>WordPress</p>
-                <p>WooCommerce</p>
-                <p>CSS3</p>
-                <p>HTML5</p>
-                <p>JavaScript</p>
-                <p>JQuerry</p>
-            </div>
-            <p   data-id="dizainazona" class="active">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.
-
-                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!
-
-                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>
-            <h1  data-id="1">project 1</h1>
-            <div data-id="1" class="stack">
-                <p>HTML5</p>
-                <p>JavaScript</p>
-                <p>JQuerry</p>
-            </div>
-            <p   data-id="1">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.
-
-                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!
-
-                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>
-            <h1  data-id="2">project 2</h1>
-            <div data-id="2" class="stack">
-                <p>HTML5</p>
-                <p>JavaScript</p>
-                <p>JQuerry</p>
-            </div>
-            <p   data-id="2">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.
-
-                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!
-
-                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>
-            <h1  data-id="3">project 3</h1>
-            <div data-id="3" class="stack">
-                <p>HTML5</p>
-                <p>JavaScript</p>
-                <p>JQuerry</p>
-            </div>
-            <p   data-id="3">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.
-
-                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!
-
-                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>
-            <h1  data-id="4">project 4</h1>
-            <div data-id="4" class="stack">
-                <p>HTML5</p>
-                <p>JavaScript</p>
-                <p>JQuerry</p>
-            </div>
-            <p   data-id="4">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.
-
-                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!
-
-                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>
-            <h1  data-id="5">project 5</h1>
-            <div data-id="5" class="stack">
-                <p>HTML5</p>
-                <p>JavaScript</p>
-                <p>JQuerry</p>
-            </div>
-            <p   data-id="5">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.
-
-                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!
-
-                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>
-            <h1  data-id="6">project 6</h1>
-            <div data-id="6" class="stack">
-                <p>HTML5</p>
-                <p>JavaScript</p>
-                <p>JQuerry</p>
-            </div>
-            <p   data-id="6">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.
-
-                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!
-
-                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>
-            <h1  data-id="7">project 7</h1>
-            <div data-id="7" class="stack">
-                <p>HTML5</p>
-                <p>JavaScript</p>
-                <p>JQuerry</p>
-            </div>
-            <p   data-id="7">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.
-
-                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!
-
-                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>
-            <h1  data-id="8">project 8</h1>
-            <div data-id="8" class="stack">
-                <p>HTML5</p>
-                <p>JavaScript</p>
-                <p>JQuerry</p>
-            </div>
-            <p   data-id="8">Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.
-
-                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!
-
-                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve</p>
-        </div>
-        <div class="project">
-            <img class="bg" src="./images/macbook.png" alt="">
-            <img data-id="dizainazona" class="content active-content" src="./images/c_1.png" alt="">
-            <p class="content" data-id="2">2</p>
-            <p class="content" data-id="3">3</p>
-            <p class="content" data-id="4">4</p>
-            <p class="content" data-id="5">5</p>
-            <p class="content" data-id="6">6</p>
-            <p class="content" data-id="7">7</p>
-            <p class="content" data-id="8">8</p>
-        </div>
+    <div class="project-col">
+        1
     </div>
 </section>
 <section>

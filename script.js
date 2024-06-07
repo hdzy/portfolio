@@ -17,7 +17,8 @@ class Cursor {
         this.init();
     }
     init() {
-        window.addEventListener("mousemove",(e) => this.onMouseMove(e));
+        // window.addEventListener("mousemove",(e) => this.onMouseMove(e));
+        window.addEventListener("pointermove",(e) => this.onMouseMove(e));
 
         document.querySelectorAll('a').forEach((e) => {
             e.addEventListener('mouseenter', (e) => this.onLinkHover(e))
@@ -100,11 +101,14 @@ const textConfig = [
 ]
 
 class TextInputHandler {
-    constructor(values, inputContainer) {
+    constructor(values, inputContainer, isRemove = true, speed = 0.6, height = 40) {
         this.values = values;
-        this.speed = 0.6;
+        this.speed = speed;
         this.inputContainer = inputContainer;
         this.defaultText = this.inputContainer.innerHTML;
+        this.isRemove = isRemove;
+        this.height = height;
+
         this.init();
     }
 
@@ -113,8 +117,16 @@ class TextInputHandler {
         this.createTextCursor();
     }
 
+    destroy() {
+        cancelAnimationFrame(this.raf);
+        this.raf = null;
+        clearTimeout(this.timeout);
+        this.timeout = null;
+    }
+
     createTextCursor() {
-        this.inputContainer.classList.add('text-cursor', 'text-cursor-active')
+        this.inputContainer.classList.add('text-cursor', 'text-cursor-active');
+        this.inputContainer.style.setProperty("--height-cursor", this.height + 'px');
     }
     getRandomValue() {
         return this.values[Math.floor(Math.random() * this.values.length)];
@@ -127,18 +139,20 @@ class TextInputHandler {
     insertText(textArray) {
         this.inputContainer.classList.remove('text-cursor-active');
         if (!textArray) {
-            textArray = (' '+ this.getRandomValue()[config.currentLanguage]).split('')
+            textArray = (' ' + this.getRandomValue()[config.currentLanguage]).split('')
         }
         if (textArray.length > 0) {
             this.inputContainer.innerHTML += textArray.shift();
-            setTimeout(() => {
+            this.timeout = setTimeout(() => {
                 this.raf = requestAnimationFrame(() => this.insertText(textArray))
             }, this.getRandomSpeed() * this.speed)
         } else {
             this.inputContainer.classList.add('text-cursor-active');
-            setTimeout(() => {
-                this.removeText();
-            }, 2500)
+            if (this.isRemove) {
+                setTimeout(() => {
+                    this.removeText();
+                }, 2500)
+            }
             cancelAnimationFrame(this.raf);
         }
     }
@@ -414,20 +428,114 @@ const mainProject = new ProjectScroll(document.querySelector('#work-section'), d
 //     content.style.setProperty('--mt', `-${scroll}px`);
 // })
 
-document.querySelectorAll('.up').forEach((e) => {
-    e.addEventListener('click', () => scrollController.scrollPrev());
+// document.querySelectorAll('.up').forEach((e) => {
+//     e.addEventListener('click', () => scrollController.scrollPrev());
+// })
+//
+// document.querySelectorAll('.down').forEach((e) => {
+//     e.addEventListener('click', () => scrollController.scrollNext());
+// })
+// document.querySelectorAll('.projects-picker > a').forEach((e) => {
+//     e.addEventListener('click', (el) => {
+//         document.querySelector('.projects-picker > a.active').classList.remove('active');
+//         const target = el.target;
+//         target.classList.add('active');
+//         document.querySelectorAll('.project-info > .active').forEach(e => e.classList.remove('active'))
+//         document.querySelectorAll(`.project-info > *[data-id="${target.dataset['id']}"]`).forEach(e => e.classList.add('active'));
+//         mainProject.updateEl(document.querySelector(`.content[data-id="${target.dataset['id']}"]`));
+//     })
+// })
+
+const projectsSlider = new Swiper('.project-picker', {
+    loop: true,
+    slidesPerView: 1,
+    centeredSlides: true,
+    initialSlide: 1,
+    effect: "creative",
+    creativeEffect: {
+        prev: {
+            shadow: true,
+            translate: [0, 0, -800],
+            rotate: [180, 0, 0],
+        },
+        next: {
+            shadow: true,
+            translate: [0, 0, -800],
+            rotate: [-180, 0, 0],
+        },
+    },
+
+    navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+    },
 })
 
-document.querySelectorAll('.down').forEach((e) => {
-    e.addEventListener('click', () => scrollController.scrollNext());
+const descriptions = [
+    {
+        en: ' 0Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.\n' +
+            '\n' +
+            '                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!\n' +
+            '\n' +
+            '                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve'
+    },
+    {
+        en: ' 10Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.\n' +
+            '\n' +
+            '                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!\n' +
+            '\n' +
+            '                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve'
+    },
+    {
+        en: ' 20Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.\n' +
+            '\n' +
+            '                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!\n' +
+            '\n' +
+            '                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve'
+    },
+    {
+        en: ' 30Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.\n' +
+            '\n' +
+            '                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!\n' +
+            '\n' +
+            '                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve'
+    },
+    {
+        en: ' 40Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.\n' +
+            '\n' +
+            '                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!\n' +
+            '\n' +
+            '                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve'
+    },
+    {
+        en: ' 50Lorem ipsum dolor sit amet. Et molestiae repellat sit eius nobis eum velit rerum. Sed rerum tempora qui recusandae iure aut autem illo ab fugit saepe et voluptatem voluptatibus non excepturi quisquam. Et atque dolor aut consequatur maiores aut omnis fugiat aut autem blanditiis eos rerum consequuntur.\n' +
+            '\n' +
+            '                Qui amet sint At culpa numquam At libero aspernatur qui similique quae quo explicabo aliquam et porro corporis vel quaerat enim. Ab aperiam consequatur cum architecto dignissimos ea corporis facilis id quos sapiente ut fuga molestias est voluptas veniam. Qui maiores voluptate ea accusamus numquam vel voluptate labore nam quia molestias a voluptas minus est minima omnis et rerum quasi!\n' +
+            '\n' +
+            '                Eos voluptatem enim qui necessitatibus distinctio ut Quis veritatis est itaque ve'
+    }
+]
+
+let descriptionCursor = null;
+
+projectsSlider.on('slideChange', (e) => {
+    const index = e.realIndex;
+
+    document.querySelector('.project-info.current').classList.remove('current');
+
+    if (descriptionCursor) descriptionCursor.destroy();
+
+    const newEl = document.querySelector(`.project-info[data-project="${index}"]`);
+    const newElDescriptionEl = newEl.querySelector('.project-description');
+
+    newElDescriptionEl.innerHTML = '';
+
+
+    descriptionCursor = new TextInputHandler([{
+        en: descriptions[index][config.currentLanguage],
+    }], newElDescriptionEl, false, 0.1, 20)
+
+    newEl.classList.add('current');
+
 })
-document.querySelectorAll('.projects-picker > a').forEach((e) => {
-    e.addEventListener('click', (el) => {
-        document.querySelector('.projects-picker > a.active').classList.remove('active');
-        const target = el.target;
-        target.classList.add('active');
-        document.querySelectorAll('.project-info > .active').forEach(e => e.classList.remove('active'))
-        document.querySelectorAll(`.project-info > *[data-id="${target.dataset['id']}"]`).forEach(e => e.classList.add('active'));
-        mainProject.updateEl(document.querySelector(`.content[data-id="${target.dataset['id']}"]`));
-    })
-})
+
